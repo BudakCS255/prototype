@@ -30,6 +30,8 @@
             <option value="Case003">Case003</option>
         </select>
         <input type="submit" name="view_images" value="View Images">
+        <!-- Add a button to trigger the download -->
+        <a href="<?php echo $_SERVER['PHP_SELF']; ?>?folder=<?php echo $_GET['folder']; ?>&download=1" class="download-link">Download All Images as ZIP</a>
     </form>
 
     <?php
@@ -123,6 +125,10 @@
         // Redirect back to index.php with the message
         header("Location: index.php?message=" . urlencode($message));
         exit();
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['download']) && $_GET['download'] == 1 && isset($_GET['folder'])) {
+        include 'download_images.php'; // Include the code to handle image download and ZIP creation
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['view_images'])) {
