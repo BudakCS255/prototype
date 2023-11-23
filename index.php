@@ -39,6 +39,15 @@
     if (isset($_GET['message'])) {
         echo '<div id="upload-feedback"><p>' . htmlspecialchars($_GET['message']) . '</p></div>';
     }
+
+    // Add a button to trigger downloading all images in a folder as a ZIP file
+    if (isset($_GET['folder'])) {
+        $folder = sanitize_folder($_GET['folder']);
+        echo '<form action="download_images.php" method="POST">';
+        echo '<input type="hidden" name="folder" value="' . $folder . '">';
+        echo '<input type="submit" name="download_images" value="Download Images as ZIP">';
+        echo '</form>';
+    }
     ?>
 </body>
 </html>
